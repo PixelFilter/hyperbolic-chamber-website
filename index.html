@@ -1,107 +1,138 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hyperbolic Chamber</title>
-    <meta name="description" content="Hyperbolic Chamber is a place for music, sonic exploration, and experimental sets from the underground.">
+    <meta name="description" content="Hyperbolic Chamber is a place for music. A place for sonic exploration. In the Chamber, you can experiment.">
     <link rel="icon" href="assets/images/favicon.ico">
     <link rel="stylesheet" href="assets/css/site.css">
+    <noscript>
+      <style>
+        .chamber-loader {
+          display: none !important;
+        }
+
+        .home-page.is-loading {
+          overflow: auto !important;
+        }
+
+        .home-page.is-loading .page-shell {
+          opacity: 1 !important;
+          visibility: visible !important;
+          transform: none !important;
+        }
+      </style>
+    </noscript>
   </head>
-  <body>
+  <body class="home-page is-loading">
+    <div class="chamber-loader" aria-hidden="true">
+      <div class="chamber-loader__screen chamber-loader__screen--grid"></div>
+      <div class="chamber-loader__screen chamber-loader__screen--distortion"></div>
+      <div class="chamber-loader__screen chamber-loader__screen--rings chamber-loader__screen--rings-a"></div>
+      <div class="chamber-loader__screen chamber-loader__screen--rings chamber-loader__screen--rings-b"></div>
+      <div class="chamber-loader__screen chamber-loader__screen--rings chamber-loader__screen--rings-c"></div>
+      <div class="chamber-loader__screen chamber-loader__screen--frame"></div>
+      <div class="chamber-loader__screen chamber-loader__screen--scan"></div>
+      <div class="chamber-loader__copy">
+        <h1 class="chamber-loader__title">
+          <span class="chamber-loader__line">Entering The Chamber</span>
+        </h1>
+      </div>
+    </div>
     <div class="page-shell">
       <header class="site-header">
         <div class="site-header__inner">
-          <a class="site-title" href="/">Hyperbolic Chamber</a>
-          <nav class="site-nav" aria-label="Primary">
-            <a class="nav-link" href="/" aria-current="page">Home</a>
-            <a class="nav-link" href="/episodes/">Episodes</a>
-            <a class="nav-link" href="/origins/">Origins</a>
-            <a class="nav-link" href="/get-featured/">Get Featured</a>
+          <div class="brand-lockup">
+            <div class="brand-mark" aria-hidden="true"></div>
+            <a class="site-title" href="./index.html" aria-current="page">
+              Hyperbolic Chamber
+            </a>
+          </div>
+          <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+            <span class="menu-toggle__label">Menu</span>
+            <span class="menu-toggle__icon" aria-hidden="true"></span>
+          </button>
+          <nav class="site-nav" id="site-nav" aria-label="Primary">
+            <a class="nav-link" href="./index.html" aria-current="page">Home</a>
+            <a class="nav-link" href="./episodes/index.html">Episodes</a>
+            <a class="nav-link" href="./origins/index.html">Origins</a>
+            <a class="nav-link" href="./get-featured/index.html">Get Featured</a>
           </nav>
         </div>
       </header>
-
       <main>
-        <section class="hero hero--home">
-          <div class="hero__meta">
-            <div class="stacked-lines">
-              <span>Turn On.</span>
-              <span>Tune In.</span>
-              <span>Drop Out.</span>
-            </div>
-            <div class="social-stack">
-              <a href="https://www.youtube.com/@Hyperbolic_Chamber" target="_blank" rel="noreferrer">YouTube</a><br>
-              <a href="https://www.instagram.com/hyperbolic__chamber__/" target="_blank" rel="noreferrer">Instagram</a><br>
-              <a href="https://soundcloud.com/hyperbolic_chamber" target="_blank" rel="noreferrer">SoundCloud</a>
-            </div>
-          </div>
-
-          <div class="hero__top">
-            <div class="logo-wrap">
-              <img src="assets/images/main-logo.png" alt="Hyperbolic Chamber">
-            </div>
-            <div class="hero__copy">
-              <p><em>Hyperbolic Chamber</em> is a place for music. A place for sonic exploration. In the Chamber, you can experiment. You are encouraged to take risks, and play with sounds you wouldn't normally do so. Everything in the Chamber begins and ends with the music. Step inside. All are welcome.</p>
-            </div>
+        <section class="home-stage">
+          <div class="home-stage__grid">
+            <article class="home-stage__logo">
+              <div class="home-stage__logo-frame">
+                <img src="assets/images/main-logo.png" alt="Hyperbolic Chamber">
+              </div>
+              <p class="home-manifesto__text"><em>Hyperbolic Chamber</em> is a place for music. A place for sonic exploration. In the Chamber, you can experiment. You are encouraged to take risks, and play with sounds you wouldn't normally do so. Everything in the Chamber begins and ends with the music. Step inside. All are welcome.</p>
+            </article>
+            <article class="home-stage__latest">
+              <p class="home-stage__label">Latest Episode</p>
+              <h1 class="home-stage__title" data-current-episode-title>Tunnel Vision</h1>
+              <p class="home-stage__meta" data-current-episode-guest></p>
+              <div class="embed-frame embed-frame--square home-stage__embed">
+                <iframe data-current-episode-embed title="Latest Episode" loading="lazy" allow="autoplay"></iframe>
+              </div>
+            </article>
           </div>
         </section>
-
-        <section class="marquee" aria-label="Latest episode">
-          <div class="marquee__track">
-            <span>Latest Episode</span>
-            <span>〰</span>
-            <span>Latest Episode</span>
-            <span>〰</span>
-            <span>Latest Episode</span>
-            <span>〰</span>
-            <span>Latest Episode</span>
-            <span>〰</span>
-            <span>Latest Episode</span>
-            <span>〰</span>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="feature-split">
-            <div class="feature-card">
-              <p class="eyebrow">World Premier</p>
-              <h1 class="feature-title">Georgetown Steam Plant</h1>
-              <p class="feature-description">A special anniversary set filmed at the Georgetown Steam Plant with <a href="https://www.instagram.com/amansridhar/" target="_blank" rel="noreferrer">AMAN</a> and <a href="https://www.pixelfilter.space/" target="_blank" rel="noreferrer">pixelfilter</a>.</p>
+        <section class="home-film">
+          <div class="home-film__shell">
+            <div class="home-film__copy">
+              <p class="home-stage__label" data-world-premiere-eyebrow>World Premier</p>
+              <h2 class="home-film__title" data-world-premiere-title>Georgetown Steam Plant</h2>
+              <p class="home-film__text" data-world-premiere-description>A special anniversary set filmed at the Georgetown Steam Plant<br>with <a href="https://www.instagram.com/amansridhar/" target="_blank" rel="noreferrer">AMAN</a> and <a href="https://www.pixelfilter.space/" target="_blank" rel="noreferrer">pixelfilter</a></p>
+              <div class="home-film__links">
+                <a class="nav-link home-film__link home-film__link--button" data-world-premiere-primary-link href="https://www.youtube.com/watch?v=7B9Kr_DX7HI" target="_blank" rel="noreferrer">Watch Full Set</a>
+              </div>
             </div>
-            <div class="embed-frame embed-frame--video">
+            <div class="embed-frame embed-frame--video home-film__embed">
               <iframe
-                title="Hyperbolic Chamber | Georgetown Steam Plant with AMAN and PIXELFILTER"
-                loading="lazy"
+                data-world-premiere-embed
+                title="Hyperbolic Chamber | Georgetown Steam Plant with AMAN and pixelfilter"
+                loading="eager"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerpolicy="strict-origin-when-cross-origin"
                 allowfullscreen
-                src="https://www.youtube.com/embed/7B9Kr_DX7HI?feature=oembed"
+                src="https://www.youtube.com/embed/7B9Kr_DX7HI?start=5&autoplay=1&mute=1&enablejsapi=1&playsinline=1&rel=0&controls=0&modestbranding=1&iv_load_policy=3&cc_load_policy=0&disablekb=1&fs=0&loop=1&playlist=7B9Kr_DX7HI"
               ></iframe>
-            </div>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="feature-split">
-            <div class="copy-card">
-              <p class="eyebrow">Latest Episode</p>
-              <h2 class="feature-title" data-current-episode-title>Episode 32</h2>
-              <p class="feature-description" data-current-episode-guest></p>
-              <p class="feature-description" data-current-episode-date></p>
-              <p class="feature-description"><a href="/episodes/">Browse the full archive</a></p>
-            </div>
-            <div class="embed-frame embed-frame--square">
-              <iframe data-current-episode-embed title="Latest Episode" loading="lazy" allow="autoplay"></iframe>
+              <button
+                class="video-audio-toggle"
+                type="button"
+                data-world-premiere-audio-toggle
+                data-muted="true"
+                aria-pressed="false"
+                aria-label="Unmute video"
+              >
+                <span class="video-audio-toggle__icon video-audio-toggle__icon--unmuted" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="M3 9v6h4l5 4V5L7 9H3Z"></path>
+                    <path d="M16.5 8.5a5 5 0 0 1 0 7"></path>
+                    <path d="M19 6a8.5 8.5 0 0 1 0 12"></path>
+                  </svg>
+                </span>
+                <span class="video-audio-toggle__icon video-audio-toggle__icon--muted" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="M3 9v6h4l5 4V5L7 9H3Z"></path>
+                    <path d="m16 9 5 5"></path>
+                    <path d="m21 9-5 5"></path>
+                  </svg>
+                </span>
+              </button>
             </div>
           </div>
         </section>
       </main>
-
       <footer class="site-footer">
         <div class="site-footer__inner">
-          <div class="site-footer__top">
-            <div class="footer-tagline">Turn On.<br>Tune In.<br>Drop Out.</div>
+          <div class="footer-grid">
+            <div>
+              <p class="footer-tagline">Turn On.<br>Tune In.<br>Drop Out.</p>
+            </div>
             <div class="site-footer__logo">
               <img src="assets/images/main-logo.png" alt="Hyperbolic Chamber">
             </div>
@@ -114,6 +145,13 @@
         </div>
       </footer>
     </div>
+    <script src="assets/js/site-data.js"></script>
     <script src="assets/js/site.js"></script>
   </body>
 </html>
+
+
+
+
+
+

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Get Featured - Hyperbolic Chamber</title>
-    <meta name="description" content="Submit your work to Hyperbolic Chamber and get featured.">
+    <meta name="description" content="Submit your work to Hyperbolic Chamber and step into the underground techno archive.">
     <link rel="icon" href="../assets/images/favicon.ico">
     <link rel="stylesheet" href="../assets/css/site.css">
   </head>
@@ -12,26 +12,45 @@
     <div class="page-shell">
       <header class="site-header">
         <div class="site-header__inner">
-          <a class="site-title" href="/">Hyperbolic Chamber</a>
-          <nav class="site-nav" aria-label="Primary">
-            <a class="nav-link" href="/">Home</a>
-            <a class="nav-link" href="/episodes/">Episodes</a>
-            <a class="nav-link" href="/origins/">Origins</a>
-            <a class="nav-link" href="/get-featured/" aria-current="page">Get Featured</a>
+          <div class="brand-lockup">
+            <div class="brand-mark" aria-hidden="true"></div>
+            <a class="site-title" href="../index.html">
+              Hyperbolic Chamber
+            </a>
+          </div>
+          <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+            <span class="menu-toggle__label">Menu</span>
+            <span class="menu-toggle__icon" aria-hidden="true"></span>
+          </button>
+          <nav class="site-nav" id="site-nav" aria-label="Primary">
+            <a class="nav-link" href="../index.html">Home</a>
+            <a class="nav-link" href="../episodes/index.html">Episodes</a>
+            <a class="nav-link" href="../origins/index.html">Origins</a>
+            <a class="nav-link" href="../get-featured/index.html" aria-current="page">Get Featured</a>
           </nav>
         </div>
       </header>
 
       <main>
-        <section class="page-hero page-hero--compact">
-          <div class="section-header">
-            <p class="eyebrow">Submission</p>
-            <h1 class="page-title">Get Featured</h1>
-            <p class="page-intro">We spotlight artists whose sound embodies the raw essence of the underground. If your style challenges convention and resonates with dark rooms and late nights, this is your space to be heard.</p>
+        <section class="page-hero">
+          <div class="feature-form-layout">
+            <div>
+              <p class="eyebrow">Submission</p>
+              <h1 class="page-title page-title--mono">Send us something that feels alive after midnight.</h1>
+              <p class="page-intro">WeÃ¢â‚¬â„¢re looking for artists with tension in their selections, patience in their pacing, and a point of view that survives low light. If your sound belongs in a concrete room with a heavy system, send it through.</p>
+            </div>
+            <article class="criteria-card">
+              <p class="eyebrow">What We Want</p>
+              <ul class="criteria-list">
+                <li>Techno, electro, deep club pressure, or adjacent sounds with real character.</li>
+                <li>A clear artistic identity rather than trend-chasing polish.</li>
+                <li>Links that help us hear your range quickly and understand your direction.</li>
+              </ul>
+            </article>
           </div>
         </section>
 
-        <section class="feature-form-section section">
+        <section class="section">
           <div class="feature-form-layout">
             <form class="form-card" data-featured-form>
               <div class="field">
@@ -52,24 +71,31 @@
               </div>
               <div class="field">
                 <label for="message">Message</label>
-                <textarea id="message" name="message" placeholder="Tell us more about you and your inspirations"></textarea>
+                <textarea id="message" name="message" placeholder="Tell us about your sound, references, and the room you imagine this living in."></textarea>
               </div>
-              <button class="button" type="submit">Submit</button>
+              <button class="button" type="submit">Open Submission Email</button>
             </form>
 
-            <aside class="social-card">
-              <p class="eyebrow">Connect With Us</p>
-              <p><a href="https://www.instagram.com/hyperbolic__chamber__/" target="_blank" rel="noreferrer">@hyperbolic__chamber__</a></p>
-              <p>This local rebuild uses a mailto submission flow for now, so the filled-out form opens your email client instead of posting to Squarespace.</p>
-            </aside>
+            <div class="contact-grid">
+              <article class="social-card">
+                <p class="eyebrow">Direct Line</p>
+                <p><a href="https://www.instagram.com/hyperbolic__chamber__/" target="_blank" rel="noreferrer">@hyperbolic__chamber__</a></p>
+                <p>Use the form to generate an email draft. That keeps submissions simple while the site stays static.</p>
+              </article>
+              <article class="social-card">
+                <p class="eyebrow">Best Submissions</p>
+                <p>Include a recent mix, a short note on your sound, and anything visual that helps us understand your world.</p>
+              </article>
+            </div>
           </div>
         </section>
       </main>
-
       <footer class="site-footer">
         <div class="site-footer__inner">
-          <div class="site-footer__top">
-            <div class="footer-tagline">Turn On.<br>Tune In.<br>Drop Out.</div>
+          <div class="footer-grid">
+            <div>
+              <p class="footer-tagline">Send pressure.<br>Send mood.<br>Send intent.</p>
+            </div>
             <div class="site-footer__logo">
               <img src="../assets/images/main-logo.png" alt="Hyperbolic Chamber">
             </div>
@@ -82,6 +108,11 @@
         </div>
       </footer>
     </div>
+    <script src="../assets/js/site-data.js"></script>
     <script src="../assets/js/site.js"></script>
   </body>
 </html>
+
+
+
+
