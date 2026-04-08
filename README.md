@@ -1,11 +1,11 @@
 # hyperbolic-chamber-website
-Self-hosted static rebuild of `https://www.hyperbolic-chamber.space/`.
+Static rebuild of `https://www.hyperbolic-chamber.space/`.
 
 Routes:
 - `/`
-- `/episodes/`
+- `/episodes/` - full archive with episode count and sort toggle
 - `/origins/`
-- `/get-featured/`
+- `/get-featured/` - submission form with contact link
 
 Local assets live in `assets/`.
-SoundCloud and YouTube embeds are intentionally still external.
+SoundCloud and YouTube embeds remain external.
