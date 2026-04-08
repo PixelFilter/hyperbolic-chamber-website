@@ -5,6 +5,7 @@ const randomFeaturedEpisode = episodes.length ? episodes[Math.floor(Math.random(
 const featuredEpisode = episodes.find((episode) => episode.number === siteData.featuredEpisodeNumber) || latestEpisode;
 const worldPremiere = siteData.worldPremiere || null;
 const repeatedTickerItems = episodes.length ? [...episodes, ...episodes] : [];
+const defaultEpisodeSort = "asc";
 
 function getCompactEpisodeEmbed(episode) {
   if (!episode || !episode.embed) return "";
@@ -13,6 +14,17 @@ function getCompactEpisodeEmbed(episode) {
     .replace("visual=true", "visual=false")
     .replace("show_user=true", "show_user=false")
     .replace("show_teaser=false", "show_teaser=true");
+}
+
+function getSortedEpisodes(sortOrder = defaultEpisodeSort) {
+  return [...episodes].sort((left, right) => {
+    const leftNumber = Number(left.number) || 0;
+    const rightNumber = Number(right.number) || 0;
+
+    return sortOrder === "asc"
+      ? leftNumber - rightNumber
+      : rightNumber - leftNumber;
+  });
 }
 
 function episodeCardMarkup(episode) {
@@ -35,10 +47,44 @@ function episodeCardMarkup(episode) {
   `;
 }
 
-function renderEpisodesGrid() {
+function renderArchiveCount() {
+  const count = document.querySelector("[data-archive-count]");
+  if (!count) return;
+
+  count.textContent = `${episodes.length} EPISODES`;
+}
+
+function renderEpisodesGrid(sortOrder = defaultEpisodeSort) {
   const mount = document.querySelector("[data-episodes-grid]");
   if (!mount || !episodes.length) return;
-  mount.innerHTML = episodes.map(episodeCardMarkup).join("");
+
+  mount.innerHTML = getSortedEpisodes(sortOrder).map(episodeCardMarkup).join("");
+}
+
+function wireEpisodeSort() {
+  const sortButtons = Array.from(document.querySelectorAll("[data-episode-sort]"));
+  if (!sortButtons.length) {
+    renderEpisodesGrid(defaultEpisodeSort);
+    return;
+  }
+
+  function setActiveSort(sortOrder) {
+    sortButtons.forEach((button) => {
+      const isActive = button.dataset.episodeSort === sortOrder;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-pressed", String(isActive));
+    });
+
+    renderEpisodesGrid(sortOrder);
+  }
+
+  setActiveSort(defaultEpisodeSort);
+
+  sortButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      setActiveSort(button.dataset.episodeSort || defaultEpisodeSort);
+    });
+  });
 }
 
 function renderFeaturedEpisode() {
@@ -158,7 +204,6 @@ function renderEpisodeMeta() {
   document.querySelectorAll("[data-featured-episode-title]").forEach((node) => {
     node.textContent = randomFeaturedEpisode.title;
   });
-
 
   document.querySelectorAll("[data-featured-episode-guest]").forEach((node) => {
     if (randomFeaturedEpisode.guestUrl) {
@@ -307,7 +352,8 @@ function initializeHomeLoader() {
 }
 
 initializeHomeLoader();
-renderEpisodesGrid();
+renderArchiveCount();
+wireEpisodeSort();
 renderFeaturedEpisode();
 renderWorldPremiere();
 wireWorldPremiereMuteToggle();
@@ -315,6 +361,3 @@ renderEpisodeMeta();
 renderEpisodeTicker();
 wireFeaturedForm();
 wireMobileMenu();
-
-
-
