@@ -1,9 +1,19 @@
-﻿const siteData = window.siteData || {};
+const siteData = window.siteData || {};
 const episodes = Array.isArray(siteData.episodes) ? siteData.episodes : [];
 const latestEpisode = episodes[episodes.length - 1] || null;
+const randomFeaturedEpisode = episodes.length ? episodes[Math.floor(Math.random() * episodes.length)] : null;
 const featuredEpisode = episodes.find((episode) => episode.number === siteData.featuredEpisodeNumber) || latestEpisode;
 const worldPremiere = siteData.worldPremiere || null;
 const repeatedTickerItems = episodes.length ? [...episodes, ...episodes] : [];
+
+function getCompactEpisodeEmbed(episode) {
+  if (!episode || !episode.embed) return "";
+
+  return episode.embed
+    .replace("visual=true", "visual=false")
+    .replace("show_user=true", "show_user=false")
+    .replace("show_teaser=false", "show_teaser=true");
+}
 
 function episodeCardMarkup(episode) {
   return `
@@ -12,10 +22,11 @@ function episodeCardMarkup(episode) {
         <div class="episode-card__head">
           <p class="episode-card__index">${episode.number}</p>
           <div class="episode-card__meta">
-            <h2 class="episode-card__title">${episode.title}</h2>
-            <p class="episode-card__guest">with <a href="${episode.guestUrl}" target="_blank" rel="noreferrer">${episode.guest}</a></p>
+            <p class="episode-card__number">Episode ${episode.number}</p>
+            <p class="episode-card__guest">WITH <a href="${episode.guestUrl}" target="_blank" rel="noreferrer">${episode.guest}</a></p>
           </div>
         </div>
+        <h2 class="episode-card__title">${episode.title}</h2>
       </div>
       <div class="embed-frame embed-frame--square">
         <iframe title="Episode ${episode.number}: ${episode.title}" loading="lazy" allow="autoplay" src="${episode.embed}"></iframe>
@@ -142,22 +153,29 @@ function wireWorldPremiereMuteToggle() {
 }
 
 function renderEpisodeMeta() {
-  if (!latestEpisode) return;
+  if (!randomFeaturedEpisode) return;
 
-  document.querySelectorAll("[data-episode-count]").forEach((node) => {
-    node.textContent = String(episodes.length);
+  document.querySelectorAll("[data-featured-episode-title]").forEach((node) => {
+    node.textContent = randomFeaturedEpisode.title;
   });
 
-  document.querySelectorAll("[data-latest-episode-number]").forEach((node) => {
-    node.textContent = `Episode ${latestEpisode.number}`;
+
+  document.querySelectorAll("[data-featured-episode-guest]").forEach((node) => {
+    if (randomFeaturedEpisode.guestUrl) {
+      node.innerHTML = `<a href="${randomFeaturedEpisode.guestUrl}" target="_blank" rel="noreferrer">${randomFeaturedEpisode.guest}</a>`;
+      return;
+    }
+
+    node.textContent = randomFeaturedEpisode.guest;
   });
 
-  document.querySelectorAll("[data-latest-episode-title]").forEach((node) => {
-    node.textContent = latestEpisode.title;
+  document.querySelectorAll("[data-featured-episode-date]").forEach((node) => {
+    node.textContent = randomFeaturedEpisode.date;
   });
 
-  document.querySelectorAll("[data-latest-episode-guest]").forEach((node) => {
-    node.textContent = latestEpisode.guest;
+  document.querySelectorAll("[data-featured-episode-embed]").forEach((node) => {
+    node.src = getCompactEpisodeEmbed(randomFeaturedEpisode);
+    node.title = `Featured Episode ${randomFeaturedEpisode.number}: ${randomFeaturedEpisode.title}`;
   });
 }
 
@@ -297,5 +315,6 @@ renderEpisodeMeta();
 renderEpisodeTicker();
 wireFeaturedForm();
 wireMobileMenu();
+
 
 

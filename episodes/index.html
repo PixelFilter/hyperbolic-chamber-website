@@ -8,7 +8,7 @@
     <link rel="icon" href="../assets/images/favicon.ico">
     <link rel="stylesheet" href="../assets/css/site.css">
   </head>
-  <body>
+  <body class="episodes-page">
     <div class="page-shell">
       <header class="site-header">
         <div class="site-header__inner">
@@ -35,20 +35,27 @@
           <div class="archive-layout">
             <div>
               <p class="eyebrow">Archive</p>
-              <h1 class="page-title page-title--mono">TURN ON.<br>TUNE IN.<br>DROP OUT.</h1>
+              <h1 class="page-title page-title--mono">THE<br>CHAMBER<br>ARCHIVE</h1>
               <p class="page-intro">Browse the full Hyperbolic Chamber archive, with every mix, guest, date, and embed collected in sequence.</p>
             </div>
             <aside class="archive-sidebar">
-              <article class="stat-card">
-                <p class="stat-card__label">Total Episodes</p>
-                <p class="stat-card__value" data-episode-count>32</p>
-                <p class="stat-card__detail">Complete archive of published sessions.</p>
-              </article>
-              <article class="stat-card">
-                <p class="stat-card__label">Latest Drop</p>
-                <p class="stat-card__value" data-latest-episode-number>Episode 32</p>
-                <p class="stat-card__detail" data-latest-episode-title>Tunnel Vision</p>
-              </article>
+              <div class="featured-episode-panel">
+                <div class="featured-episode-panel__embed">
+                  <iframe data-featured-episode-embed title="Featured Hyperbolic Chamber episode" loading="lazy" allow="autoplay"></iframe>
+                </div>
+                <div class="featured-episode-panel__details">
+                  <article class="stat-card">
+                    <p class="stat-card__label">Featured Episode</p>
+                    <p class="stat-card__value" data-featured-episode-title>#32 Tunnel Vision</p>
+                    <p class="stat-card__detail" data-featured-episode-date>02.26.2026</p>
+                  </article>
+                  <article class="stat-card">
+                    <p class="stat-card__label">With</p>
+                    <p class="stat-card__value" data-featured-episode-guest>ELISIUM</p>
+                    <p class="stat-card__detail" data-featured-episode-date>02.26.2026</p>
+                  </article>
+                </div>
+              </div>
             </aside>
           </div>
         </section>
@@ -86,6 +93,13 @@
     <script src="../assets/js/site.js"></script>
   </body>
 </html>
+
+
+
+
+
+
+
 
 
 
