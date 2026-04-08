@@ -1559,6 +1559,12 @@ label,
 }
 
 @media (max-width: 760px) {
+  .form-card[data-featured-form] .button {
+    display: flex;
+    width: fit-content;
+    margin: 0 auto;
+  }
+
   .episode-card__body {
     min-height: 0;
     grid-template-rows: auto auto auto;
@@ -2087,6 +2093,28 @@ label,
 
 
 
+
+
+
+
+.featured-connect {
+  align-self: center;
+  justify-self: center;
+  width: 100%;
+  padding-top: 0;
+}
+
+.featured-connect .origins-connect__inner {
+  padding: 0;
+}
+
+
+
+@media (min-width: 900px) {
+  .feature-form-layout--align-center {
+    align-items: center;
+  }
+}
 
 
 
