@@ -237,21 +237,70 @@ function wireFeaturedForm() {
   const form = document.querySelector("[data-featured-form]");
   if (!form) return;
 
-  form.addEventListener("submit", (event) => {
+  const submitButton = form.querySelector('button[type="submit"]');
+  const status = form.querySelector("[data-featured-form-status]");
+  const featuredSubmissionEndpoint = siteData.forms && typeof siteData.forms.featuredSubmissionEndpoint === "string"
+    ? siteData.forms.featuredSubmissionEndpoint.trim()
+    : "";
+
+  function setStatus(message, state) {
+    if (!status) return;
+    status.textContent = message;
+    status.hidden = !message;
+    status.dataset.state = state || "";
+  }
+
+  if (!featuredSubmissionEndpoint || featuredSubmissionEndpoint.includes("your-form-id")) {
+    setStatus("Add your Formspree form URL in assets/js/site-data.js to enable submissions.", "error");
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.setAttribute("aria-disabled", "true");
+    }
+    return;
+  }
+
+  form.action = featuredSubmissionEndpoint;
+  form.method = "POST";
+
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const data = new FormData(form);
-    const subject = `Hyperbolic Chamber Submission - ${data.get("artistName") || "Artist"}`;
-    const body = [
-      `Name: ${data.get("name") || ""}`,
-      `Artist Name: ${data.get("artistName") || ""}`,
-      `Email: ${data.get("email") || ""}`,
-      `Portfolio Link: ${data.get("portfolio") || ""}`,
-      "",
-      "Message:",
-      `${data.get("message") || ""}`
-    ].join("\n");
+    const defaultButtonLabel = submitButton ? submitButton.textContent : "";
 
-    window.location.href = `mailto:hyperbolic__chamber__@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    data.append("_subject", `Hyperbolic Chamber Submission - ${data.get("artistName") || "Artist"}`);
+
+    setStatus("", "");
+
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.setAttribute("aria-disabled", "true");
+      submitButton.textContent = "Sending...";
+    }
+
+    try {
+      const response = await fetch(featuredSubmissionEndpoint, {
+        method: "POST",
+        body: data,
+        headers: {
+          Accept: "application/json"
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error("Submission failed");
+      }
+
+      form.reset();
+      setStatus("Submission sent. We will listen and reach out if it fits the chamber.", "success");
+    } catch (error) {
+      setStatus("Something went wrong while sending. Please try again in a moment.", "error");
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.removeAttribute("aria-disabled");
+        submitButton.textContent = defaultButtonLabel;
+      }
+    }
   });
 }
 

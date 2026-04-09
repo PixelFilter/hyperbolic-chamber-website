@@ -2485,6 +2485,28 @@ label,
   resize: vertical;
 }
 
+.form-status {
+  margin: 4px 0 18px;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.form-status[data-state="success"] {
+  color: var(--accent);
+}
+
+.form-status[data-state="error"] {
+  color: #ff8c7a;
+}
+
+.form-card[data-featured-form] .button:disabled,
+.form-card[data-featured-form] .button[aria-disabled="true"] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .footer-grid {
   align-items: start;
   padding: clamp(22px, 4vw, 34px) 0;

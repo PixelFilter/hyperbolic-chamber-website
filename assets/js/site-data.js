@@ -1,6 +1,10 @@
 ﻿window.siteData = {
   featuredEpisodeNumber: "32",
 
+  forms: {
+    featuredSubmissionEndpoint: "https://formspree.io/f/mgopjvwr"
+  },
+
   worldPremiere: {
     eyebrow: "WORLD PREMIER",
     title: "Georgetown Steam Plant",
