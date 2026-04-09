@@ -42,11 +42,13 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: #050505;
 }
 
 body {
   margin: 0;
   min-width: 320px;
+  background-color: #050505;
   color: var(--text);
   font-family: var(--body-font);
   line-height: 1.55;
