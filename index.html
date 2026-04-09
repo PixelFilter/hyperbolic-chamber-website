@@ -4,9 +4,64 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hyperbolic Chamber</title>
-    <meta name="description" content="Hyperbolic Chamber is a place for music. A place for sonic exploration. In the Chamber, you can experiment.">
+    <meta name="description" content="Hyperbolic Chamber is an underground music platform featuring techno mixes, guest DJ sessions, visual premieres, and a growing archive of sonic exploration.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://hyperbolic-chamber.space/">
+    <meta property="og:site_name" content="Hyperbolic Chamber">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Hyperbolic Chamber | Underground Techno Mixes, Premieres, and Archive">
+    <meta property="og:description" content="Explore Hyperbolic Chamber's underground techno archive, latest guest mixes, and visual premieres.">
+    <meta property="og:url" content="https://hyperbolic-chamber.space/">
+    <meta property="og:image" content="https://hyperbolic-chamber.space/assets/images/origin-cover.jpg">
+    <meta property="og:image:alt" content="Hyperbolic Chamber cover art">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hyperbolic Chamber | Underground Techno Mixes, Premieres, and Archive">
+    <meta name="twitter:description" content="Explore Hyperbolic Chamber's underground techno archive, latest guest mixes, and visual premieres.">
+    <meta name="twitter:image" content="https://hyperbolic-chamber.space/assets/images/origin-cover.jpg">
     <link rel="icon" href="assets/images/favicon.ico">
     <link rel="stylesheet" href="assets/css/site.css">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://hyperbolic-chamber.space/#organization",
+            "name": "Hyperbolic Chamber",
+            "url": "https://hyperbolic-chamber.space/",
+            "logo": "https://hyperbolic-chamber.space/assets/images/main-logo.png",
+            "sameAs": [
+              "https://www.youtube.com/@Hyperbolic_Chamber",
+              "https://www.instagram.com/hyperbolic__chamber__/",
+              "https://soundcloud.com/hyperbolic_chamber"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://hyperbolic-chamber.space/#website",
+            "url": "https://hyperbolic-chamber.space/",
+            "name": "Hyperbolic Chamber",
+            "description": "Underground techno mixes, guest DJ sessions, premieres, and archive.",
+            "publisher": {
+              "@id": "https://hyperbolic-chamber.space/#organization"
+            }
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://hyperbolic-chamber.space/#webpage",
+            "url": "https://hyperbolic-chamber.space/",
+            "name": "Hyperbolic Chamber",
+            "description": "Hyperbolic Chamber is an underground music platform featuring techno mixes, guest DJ sessions, visual premieres, and a growing archive of sonic exploration.",
+            "isPartOf": {
+              "@id": "https://hyperbolic-chamber.space/#website"
+            },
+            "about": {
+              "@id": "https://hyperbolic-chamber.space/#organization"
+            }
+          }
+        ]
+      }
+    </script>
     <noscript>
       <style>
         .chamber-loader {
@@ -22,6 +77,18 @@
           visibility: visible !important;
           transform: none !important;
         }
+
+        .visually-hidden {
+          position: absolute !important;
+          width: 1px !important;
+          height: 1px !important;
+          padding: 0 !important;
+          margin: -1px !important;
+          overflow: hidden !important;
+          clip: rect(0, 0, 0, 0) !important;
+          white-space: nowrap !important;
+          border: 0 !important;
+        }
       </style>
     </noscript>
   </head>
@@ -35,9 +102,9 @@
       <div class="chamber-loader__screen chamber-loader__screen--frame"></div>
       <div class="chamber-loader__screen chamber-loader__screen--scan"></div>
       <div class="chamber-loader__copy">
-        <h1 class="chamber-loader__title">
+        <div class="chamber-loader__title">
           <span class="chamber-loader__line">Entering The Chamber</span>
-        </h1>
+        </div>
       </div>
     </div>
     <div class="page-shell">
@@ -65,14 +132,23 @@
         <section class="home-stage">
           <div class="home-stage__grid">
             <article class="home-stage__logo">
+              <h1 class="visually-hidden">Hyperbolic Chamber</h1>
               <div class="home-stage__logo-frame">
-                <img src="assets/images/main-logo.png" alt="Hyperbolic Chamber">
+                <div class="home-stage__logo-stack">
+                  <img class="home-stage__logo-ghost" src="assets/images/main-logo.png" alt="" aria-hidden="true">
+                  <img class="home-stage__logo-channel home-stage__logo-channel--a" src="assets/images/main-logo.png" alt="" aria-hidden="true">
+                  <img class="home-stage__logo-channel home-stage__logo-channel--b" src="assets/images/main-logo.png" alt="" aria-hidden="true">
+                  <span class="home-stage__logo-slice home-stage__logo-slice--1" aria-hidden="true"></span>
+                  <span class="home-stage__logo-slice home-stage__logo-slice--2" aria-hidden="true"></span>
+                  <span class="home-stage__logo-slice home-stage__logo-slice--3" aria-hidden="true"></span>
+                  <img class="home-stage__logo-main" src="assets/images/main-logo.png" alt="Hyperbolic Chamber">
+                </div>
               </div>
               <p class="home-manifesto__text"><em>Hyperbolic Chamber</em> is a place for music. A place for sonic exploration. In the Chamber, you can experiment. You are encouraged to take risks, and play with sounds you wouldn't normally do so. Everything in the Chamber begins and ends with the music. Step inside. All are welcome.</p>
             </article>
             <article class="home-stage__latest">
               <p class="home-stage__label">Latest Episode</p>
-              <h1 class="home-stage__title" data-current-episode-title>Tunnel Vision</h1>
+              <h2 class="home-stage__title" data-current-episode-title>Tunnel Vision</h2>
               <p class="home-stage__meta" data-current-episode-guest></p>
               <div class="embed-frame embed-frame--square home-stage__embed">
                 <iframe data-current-episode-embed title="Latest Episode" loading="lazy" allow="autoplay"></iframe>

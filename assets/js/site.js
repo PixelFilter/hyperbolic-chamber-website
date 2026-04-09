@@ -351,7 +351,100 @@ function initializeHomeLoader() {
   window.addEventListener("load", releaseLoader, { once: true });
 }
 
+function initializeRandomLogoGlitch() {
+  const logo = document.querySelector(".home-stage__logo-main");
+  const stack = document.querySelector(".home-stage__logo-stack");
+  if (!logo || !stack) return;
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReducedMotion) return;
+
+  let updateTimeoutId = 0;
+
+  function randomBetween(min, max) {
+    return min + Math.random() * (max - min);
+  }
+
+  function randomInt(min, max) {
+    return Math.floor(randomBetween(min, max + 1));
+  }
+
+  function setGlitchVariables() {
+    const duration = randomInt(180, 620);
+    logo.style.setProperty("--logo-glitch-duration", `${duration}ms`);
+    stack.style.setProperty("--logo-glitch-duration", `${duration}ms`);
+
+    stack.style.setProperty("--logo-channel-opacity", randomBetween(0.16, 0.34).toFixed(2));
+    stack.style.setProperty("--logo-slice-opacity", randomBetween(0.42, 0.68).toFixed(2));
+    stack.style.setProperty("--logo-ghost-x", `${randomBetween(4, 18).toFixed(2)}px`);
+    stack.style.setProperty("--logo-ghost-y", `${randomBetween(-3, 3).toFixed(2)}px`);
+    stack.style.setProperty("--logo-ghost-scale-x", randomBetween(1.01, 1.06).toFixed(3));
+    stack.style.setProperty("--logo-ghost-scale-y", randomBetween(0.96, 1.01).toFixed(3));
+    stack.style.setProperty("--logo-channel-a-x", `${randomBetween(-18, -5).toFixed(2)}px`);
+    stack.style.setProperty("--logo-channel-a-y", `${randomBetween(-3, 3).toFixed(2)}px`);
+    stack.style.setProperty("--logo-channel-a-skew", `${randomBetween(-3.2, -0.8).toFixed(2)}deg`);
+    stack.style.setProperty("--logo-channel-b-x", `${randomBetween(6, 20).toFixed(2)}px`);
+    stack.style.setProperty("--logo-channel-b-y", `${randomBetween(-3, 3).toFixed(2)}px`);
+    stack.style.setProperty("--logo-channel-b-skew", `${randomBetween(0.8, 3.2).toFixed(2)}deg`);
+
+    for (let index = 1; index <= 3; index += 1) {
+      const sliceTopRanges = [
+        [4, 18],
+        [28, 48],
+        [60, 80]
+      ];
+      const sliceBottomRanges = [
+        [50, 72],
+        [16, 36],
+        [2, 12]
+      ];
+      const [topMin, topMax] = sliceTopRanges[index - 1];
+      const [bottomMin, bottomMax] = sliceBottomRanges[index - 1];
+
+      stack.style.setProperty(`--logo-slice${index}-x`, `${randomBetween(-24, 24).toFixed(2)}px`);
+      stack.style.setProperty(`--logo-slice${index}-y`, `${randomBetween(-2, 2).toFixed(2)}px`);
+      stack.style.setProperty(`--logo-slice${index}-skew`, `${randomBetween(-4, 4).toFixed(2)}deg`);
+      stack.style.setProperty(`--logo-slice${index}-top`, `${randomInt(topMin, topMax)}%`);
+      stack.style.setProperty(`--logo-slice${index}-bottom`, `${randomInt(bottomMin, bottomMax)}%`);
+    }
+
+    for (let index = 1; index <= 4; index += 1) {
+      const horizontal = randomBetween(-10, 10).toFixed(2);
+      const vertical = randomBetween(-4, 4).toFixed(2);
+      const skew = randomBetween(-2.6, 2.6).toFixed(2);
+      const scaleX = randomBetween(0.985, 1.035).toFixed(3);
+      const scaleY = randomBetween(0.97, 1.03).toFixed(3);
+      const top = randomInt(3, 68);
+      const maxBottom = Math.max(2, 92 - top);
+      const bottom = randomInt(2, maxBottom);
+
+      logo.style.setProperty(`--logo-glitch-x${index}`, `${horizontal}px`);
+      logo.style.setProperty(`--logo-glitch-y${index}`, `${vertical}px`);
+      logo.style.setProperty(`--logo-glitch-skew${index}`, `${skew}deg`);
+      logo.style.setProperty(`--logo-glitch-scale-x${index}`, scaleX);
+      logo.style.setProperty(`--logo-glitch-scale-y${index}`, scaleY);
+      logo.style.setProperty(`--logo-glitch-top${index}`, `${top}%`);
+      logo.style.setProperty(`--logo-glitch-bottom${index}`, `${bottom}%`);
+    }
+  }
+
+  function queueNextUpdate() {
+    const nextDelay = Math.floor(160 + Math.random() * 280);
+
+    updateTimeoutId = window.setTimeout(() => {
+      setGlitchVariables();
+      queueNextUpdate();
+    }, nextDelay);
+  }
+
+  setGlitchVariables();
+  stack.classList.add("is-glitching");
+  logo.classList.add("is-glitching");
+  queueNextUpdate();
+}
+
 initializeHomeLoader();
+initializeRandomLogoGlitch();
 renderArchiveCount();
 wireEpisodeSort();
 renderFeaturedEpisode();

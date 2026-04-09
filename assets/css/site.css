@@ -112,6 +112,18 @@ body::after {
   opacity: 0.48;
 }
 
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
 .chamber-loader {
   position: fixed;
   inset: 0;
@@ -972,16 +984,584 @@ label,
 .home-stage__logo-frame {
   display: grid;
   place-items: center;
+  position: relative;
   min-height: clamp(220px, 28vw, 360px);
   padding: 0;
   border: 0;
   border-radius: 0;
   background: none;
+  isolation: isolate;
 }
 
-.home-stage__logo-frame img {
+.home-stage__logo-frame::before,
+.home-stage__logo-frame::after {
+  content: "";
+  position: absolute;
+  inset: 8% 4%;
+  pointer-events: none;
+}
+
+.home-stage__logo-frame::before {
+  z-index: 0;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(195, 163, 91, 0.26), transparent 42%),
+    radial-gradient(circle at 50% 58%, rgba(242, 70, 46, 0.12), transparent 52%);
+  filter: blur(34px);
+  opacity: 0.82;
+  transform: translateY(10px) scale(0.92);
+  animation: logoAtmosphere 8.5s ease-in-out infinite;
+}
+
+.home-stage__logo-frame::after {
+  z-index: 2;
+  inset: 14% 6%;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.015) 18%,
+      rgba(0, 0, 0, 0.02) 18%,
+      rgba(0, 0, 0, 0.02) 36%,
+      rgba(255, 255, 255, 0.03) 36%,
+      rgba(255, 255, 255, 0.03) 54%,
+      rgba(0, 0, 0, 0.025) 54%,
+      rgba(0, 0, 0, 0.025) 72%,
+      rgba(255, 255, 255, 0.02) 72%,
+      rgba(255, 255, 255, 0.02) 100%
+    ),
+    repeating-linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.04) 0,
+      rgba(255, 255, 255, 0.04) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+  mix-blend-mode: soft-light;
+  opacity: 0.22;
+  background-size: 100% 100%, 100% 4px;
+  animation: logoScanDrift 14s linear infinite, logoScanRoll 2.8s linear infinite;
+}
+
+.home-stage__logo-stack {
+  grid-area: 1 / 1;
+  position: relative;
+  display: grid;
+  place-items: center;
   width: min(100%, 540px);
-  filter: grayscale(1) contrast(1.16) brightness(1.06);
+  isolation: isolate;
+  animation: logoStackWarp 11s ease-in-out infinite;
+}
+
+.home-stage__logo-stack::before,
+.home-stage__logo-stack::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.home-stage__logo-stack::before {
+  z-index: 3;
+  background:
+    radial-gradient(circle at 12% 32%, rgba(255, 247, 210, 0.22) 0 0.7%, transparent 0.8%),
+    radial-gradient(circle at 26% 74%, rgba(255, 246, 208, 0.16) 0 0.55%, transparent 0.7%),
+    radial-gradient(circle at 47% 18%, rgba(255, 243, 192, 0.18) 0 0.6%, transparent 0.76%),
+    radial-gradient(circle at 64% 61%, rgba(255, 241, 190, 0.14) 0 0.52%, transparent 0.7%),
+    radial-gradient(circle at 81% 26%, rgba(255, 244, 198, 0.18) 0 0.7%, transparent 0.84%),
+    radial-gradient(circle at 72% 80%, rgba(255, 245, 206, 0.16) 0 0.6%, transparent 0.76%),
+    repeating-radial-gradient(circle at 50% 50%, rgba(255, 248, 220, 0.055) 0 1px, transparent 1px 3px);
+  mix-blend-mode: screen;
+  opacity: 0.36;
+  filter: blur(0.2px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 140% 140%;
+  animation: logoSpecklePulse 5.8s steps(1, end) infinite, logoSpeckleDrift 12s linear infinite, logoRadialRoll 4.6s linear infinite;
+}
+
+.home-stage__logo-stack::after {
+  z-index: 4;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(255, 216, 120, 0.22), rgba(255, 216, 120, 0.08) 24%, transparent 58%),
+    linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.08) 18%, rgba(255, 240, 188, 0.14) 32%, rgba(0, 0, 0, 0.1) 46%, transparent 64%),
+    repeating-linear-gradient(
+      180deg,
+      rgba(22, 20, 18, 0.06) 0,
+      rgba(22, 20, 18, 0.06) 2px,
+      transparent 2px,
+      transparent 6px
+    );
+  mix-blend-mode: overlay;
+  opacity: 0.44;
+  filter: blur(1.2px);
+  transform: translateX(6px) scaleX(1.02) scaleY(1.01);
+  animation: logoBurnSmear 8.6s ease-in-out infinite, logoBurnRoll 16s linear infinite;
+}
+
+.home-stage__logo-ghost,
+.home-stage__logo-channel,
+.home-stage__logo-slice,
+.home-stage__logo-main {
+  grid-area: 1 / 1;
+  width: 100%;
+}
+
+.home-stage__logo-ghost {
+  position: relative;
+  z-index: 1;
+  opacity: 0.46;
+  mix-blend-mode: multiply;
+  filter:
+    blur(3px)
+    grayscale(0.28)
+    saturate(0.58)
+    brightness(0.78)
+    contrast(1.24)
+    drop-shadow(0 7px 0 rgba(15, 14, 13, 0.46))
+    drop-shadow(6px 0 12px rgba(22, 18, 14, 0.18))
+    drop-shadow(0 16px 32px rgba(0, 0, 0, 0.38));
+  animation: logoGhostPulse 9s steps(1, end) infinite, logoGhostDrag 13s ease-in-out infinite;
+}
+
+.home-stage__logo-channel,
+.home-stage__logo-slice {
+  position: relative;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.home-stage__logo-channel {
+  z-index: 5;
+  mix-blend-mode: screen;
+}
+
+.home-stage__logo-channel--a {
+  filter: sepia(1) saturate(2.4) hue-rotate(-22deg) brightness(1.05);
+}
+
+.home-stage__logo-channel--b {
+  filter: sepia(1) saturate(2.6) hue-rotate(148deg) brightness(1.02);
+}
+
+.home-stage__logo-slice {
+  z-index: 6;
+  background-image: url("../images/main-logo.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  mix-blend-mode: screen;
+  transform: translate3d(0, 0, 0);
+}
+
+.home-stage__logo-slice--1 {
+  clip-path: inset(8% 0 62% 0);
+}
+
+.home-stage__logo-slice--2 {
+  clip-path: inset(38% 0 28% 0);
+}
+
+.home-stage__logo-slice--3 {
+  clip-path: inset(72% 0 4% 0);
+}
+
+.home-stage__logo-main {
+  position: relative;
+  z-index: 2;
+  opacity: 1;
+  filter:
+    brightness(0.58)
+    contrast(1.22)
+    saturate(0.5)
+    drop-shadow(0 38px 52px rgba(0, 0, 0, 0.74))
+    drop-shadow(0 0 10px rgba(198, 161, 78, 0.04));
+  transform-origin: center;
+  animation: logoSignalFlicker 9s steps(1, end) infinite;
+}
+
+.home-stage__logo-main.is-glitching {
+  animation:
+    logoSignalFlicker 9s steps(1, end) infinite,
+    logoSignalGlitchBurst var(--logo-glitch-duration, 520ms) steps(1, end) infinite;
+}
+
+.home-stage__logo-stack.is-glitching::before {
+  opacity: 0.42;
+  filter: blur(0.1px) brightness(1.04);
+}
+
+.home-stage__logo-stack.is-glitching::after {
+  opacity: 0.48;
+  filter: blur(1.5px) brightness(1.04);
+}
+
+.home-stage__logo-stack.is-glitching .home-stage__logo-ghost {
+  opacity: 0.54;
+  transform:
+    translate3d(var(--logo-ghost-x, 8px), var(--logo-ghost-y, 0px), 0)
+    scaleX(var(--logo-ghost-scale-x, 1.03))
+    scaleY(var(--logo-ghost-scale-y, 0.98));
+}
+
+.home-stage__logo-stack.is-glitching .home-stage__logo-channel {
+  opacity: var(--logo-channel-opacity, 0.28);
+}
+
+.home-stage__logo-stack.is-glitching .home-stage__logo-channel--a {
+  transform:
+    translate3d(var(--logo-channel-a-x, -10px), var(--logo-channel-a-y, 0px), 0)
+    skewX(var(--logo-channel-a-skew, -1.8deg));
+}
+
+.home-stage__logo-stack.is-glitching .home-stage__logo-channel--b {
+  transform:
+    translate3d(var(--logo-channel-b-x, 12px), var(--logo-channel-b-y, 0px), 0)
+    skewX(var(--logo-channel-b-skew, 1.6deg));
+}
+
+.home-stage__logo-stack.is-glitching .home-stage__logo-slice {
+  opacity: var(--logo-slice-opacity, 0.62);
+  animation: logoSliceBurst var(--logo-glitch-duration, 520ms) steps(1, end) infinite;
+}
+
+.home-stage__logo-stack.is-glitching .home-stage__logo-slice--1 {
+  transform:
+    translate3d(var(--logo-slice1-x, 12px), var(--logo-slice1-y, 0px), 0)
+    skewX(var(--logo-slice1-skew, -2.2deg));
+  clip-path: inset(var(--logo-slice1-top, 10%) 0 var(--logo-slice1-bottom, 64%) 0);
+}
+
+.home-stage__logo-stack.is-glitching .home-stage__logo-slice--2 {
+  transform:
+    translate3d(var(--logo-slice2-x, -16px), var(--logo-slice2-y, 0px), 0)
+    skewX(var(--logo-slice2-skew, 2.8deg));
+  clip-path: inset(var(--logo-slice2-top, 34%) 0 var(--logo-slice2-bottom, 24%) 0);
+}
+
+.home-stage__logo-stack.is-glitching .home-stage__logo-slice--3 {
+  transform:
+    translate3d(var(--logo-slice3-x, 10px), var(--logo-slice3-y, 0px), 0)
+    skewX(var(--logo-slice3-skew, -1.6deg));
+  clip-path: inset(var(--logo-slice3-top, 70%) 0 var(--logo-slice3-bottom, 6%) 0);
+}
+
+@keyframes logoAtmosphere {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: translateY(10px) scale(0.92);
+  }
+
+  50% {
+    opacity: 0.92;
+    transform: translateY(2px) scale(1);
+  }
+}
+
+@keyframes logoScanDrift {
+  0% {
+    transform: translateY(-8px);
+    opacity: 0.16;
+  }
+
+  50% {
+    transform: translateY(6px);
+    opacity: 0.25;
+  }
+
+  100% {
+    transform: translateY(-8px);
+    opacity: 0.16;
+  }
+}
+
+@keyframes logoScanRoll {
+  0% {
+    background-position:
+      0 0,
+      0 0;
+  }
+
+  100% {
+    background-position:
+      0 0,
+      0 4px;
+  }
+}
+
+@keyframes logoSignalFlicker {
+  0%,
+  14%,
+  18%,
+  53%,
+  57%,
+  100% {
+    opacity: 1;
+    filter:
+      drop-shadow(0 34px 44px rgba(0, 0, 0, 0.58))
+      drop-shadow(0 0 28px rgba(198, 161, 78, 0.16));
+  }
+
+  15% {
+    opacity: 0.94;
+    filter:
+      drop-shadow(0 34px 44px rgba(0, 0, 0, 0.62))
+      drop-shadow(0 0 20px rgba(198, 161, 78, 0.1));
+  }
+
+  16% {
+    opacity: 0.98;
+  }
+
+  54% {
+    opacity: 0.92;
+  }
+
+  55% {
+    opacity: 1;
+    filter:
+      drop-shadow(0 38px 50px rgba(0, 0, 0, 0.65))
+      drop-shadow(0 0 32px rgba(198, 161, 78, 0.22));
+  }
+
+  56% {
+    opacity: 0.97;
+  }
+}
+
+@keyframes logoSignalGlitchBurst {
+  0%,
+  17%,
+  19%,
+  58%,
+  61%,
+  100% {
+    transform: translate3d(0, 0, 0) skewX(0deg) scaleX(1) scaleY(1);
+    clip-path: inset(0 0 0 0);
+  }
+
+  18% {
+    transform:
+      translate3d(var(--logo-glitch-x1, -6px), var(--logo-glitch-y1, 1px), 0)
+      skewX(var(--logo-glitch-skew1, -1.2deg))
+      scaleX(var(--logo-glitch-scale-x1, 1))
+      scaleY(var(--logo-glitch-scale-y1, 1));
+    clip-path: inset(var(--logo-glitch-top1, 6%) 0 var(--logo-glitch-bottom1, 18%) 0);
+  }
+
+  18.5% {
+    transform:
+      translate3d(var(--logo-glitch-x2, 5px), var(--logo-glitch-y2, -2px), 0)
+      skewX(var(--logo-glitch-skew2, 1deg))
+      scaleX(var(--logo-glitch-scale-x2, 1))
+      scaleY(var(--logo-glitch-scale-y2, 1));
+    clip-path: inset(var(--logo-glitch-top2, 48%) 0 var(--logo-glitch-bottom2, 8%) 0);
+  }
+
+  59% {
+    transform:
+      translate3d(var(--logo-glitch-x3, -8px), var(--logo-glitch-y3, 2px), 0)
+      skewX(var(--logo-glitch-skew3, -1.6deg))
+      scaleX(var(--logo-glitch-scale-x3, 1))
+      scaleY(var(--logo-glitch-scale-y3, 1));
+    clip-path: inset(var(--logo-glitch-top3, 14%) 0 var(--logo-glitch-bottom3, 44%) 0);
+  }
+
+  59.5% {
+    transform:
+      translate3d(var(--logo-glitch-x4, 7px), var(--logo-glitch-y4, -3px), 0)
+      skewX(var(--logo-glitch-skew4, 1.35deg))
+      scaleX(var(--logo-glitch-scale-x4, 1))
+      scaleY(var(--logo-glitch-scale-y4, 1));
+    clip-path: inset(var(--logo-glitch-top4, 62%) 0 var(--logo-glitch-bottom4, 4%) 0);
+  }
+
+  60% {
+    transform: translate3d(0, 0, 0) skewX(0deg);
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes logoSliceBurst {
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  18%,
+  58% {
+    opacity: var(--logo-slice-opacity, 0.78);
+  }
+
+  19%,
+  61% {
+    opacity: calc(var(--logo-slice-opacity, 0.78) * 0.7);
+  }
+}
+
+@keyframes logoGhostPulse {
+  0%,
+  14%,
+  18%,
+  53%,
+  57%,
+  100% {
+    opacity: 0.46;
+    filter:
+      blur(3px)
+      grayscale(0.28)
+      saturate(0.58)
+      brightness(0.78)
+      contrast(1.24)
+      drop-shadow(0 7px 0 rgba(15, 14, 13, 0.46))
+      drop-shadow(6px 0 12px rgba(22, 18, 14, 0.18))
+      drop-shadow(0 16px 32px rgba(0, 0, 0, 0.38));
+  }
+
+  15% {
+    opacity: 0.36;
+  }
+
+  55% {
+    opacity: 0.56;
+    filter:
+      blur(3.4px)
+      grayscale(0.34)
+      saturate(0.52)
+      brightness(0.72)
+      contrast(1.28)
+      drop-shadow(0 9px 0 rgba(12, 11, 10, 0.52))
+      drop-shadow(10px 0 16px rgba(20, 17, 13, 0.24))
+      drop-shadow(0 20px 36px rgba(0, 0, 0, 0.46));
+  }
+}
+
+@keyframes logoGhostDrag {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scaleX(1);
+  }
+
+  33% {
+    transform: translate3d(5px, 0, 0) scaleX(1.015);
+  }
+
+  61% {
+    transform: translate3d(9px, 1px, 0) scaleX(1.03);
+  }
+}
+
+@keyframes logoSpecklePulse {
+  0%,
+  100% {
+    opacity: 0.36;
+  }
+
+  35% {
+    opacity: 0.28;
+  }
+
+  52% {
+    opacity: 0.44;
+  }
+
+  78% {
+    opacity: 0.32;
+  }
+}
+
+@keyframes logoSpeckleDrift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(2px, -1px, 0);
+  }
+
+  100% {
+    transform: translate3d(-1px, 1px, 0);
+  }
+}
+
+@keyframes logoRadialRoll {
+  0% {
+    background-position:
+      0 0,
+      0 0,
+      0 0,
+      0 0,
+      0 0,
+      0 0,
+      0 0;
+  }
+
+  50% {
+    background-position:
+      0 0,
+      0 0,
+      0 0,
+      0 0,
+      0 0,
+      0 0,
+      6px -8px;
+  }
+
+  100% {
+    background-position:
+      0 0,
+      0 0,
+      0 0,
+      0 0,
+      0 0,
+      0 0,
+      12px -16px;
+  }
+}
+
+@keyframes logoBurnSmear {
+  0%,
+  100% {
+    opacity: 0.44;
+    filter: blur(1.2px);
+    transform: translateX(6px) scaleX(1.02) scaleY(1.01);
+  }
+
+  50% {
+    opacity: 0.56;
+    filter: blur(1.8px);
+    transform: translateX(10px) scaleX(1.04) scaleY(1.02);
+  }
+}
+
+@keyframes logoBurnRoll {
+  0%,
+  100% {
+    background-position:
+      0 0,
+      0 0,
+      0 0;
+  }
+
+  50% {
+    background-position:
+      0 10px,
+      12px 0,
+      0 6px;
+  }
+}
+
+@keyframes logoStackWarp {
+  0%,
+  100% {
+    transform: perspective(900px) rotateX(0deg) rotateY(0deg);
+  }
+
+  40% {
+    transform: perspective(900px) rotateX(0.35deg) rotateY(-0.45deg);
+  }
+
+  72% {
+    transform: perspective(900px) rotateX(-0.25deg) rotateY(0.4deg);
+  }
 }
 
 .home-stage__title,
@@ -1918,13 +2498,26 @@ label,
 }
 
 .site-footer__logo {
+  position: relative;
   display: grid;
   place-items: center;
+  overflow: hidden;
 }
 
 .site-footer__logo img {
   width: clamp(110px, 10vw, 170px);
-  filter: grayscale(1) contrast(1.14) brightness(1.12);
+  filter: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-stage__logo-frame::before,
+  .home-stage__logo-frame::after,
+  .home-stage__logo-stack::before,
+  .home-stage__logo-stack::after,
+  .home-stage__logo-ghost,
+  .home-stage__logo-main {
+    animation: none;
+  }
 }
 
 .footer-note {
@@ -2358,6 +2951,7 @@ label,
 
   .archive-sort {
     width: 100%;
-    justify-items: flex-start;
+    justify-items: center;
+    align-self: center;
   }
 }
