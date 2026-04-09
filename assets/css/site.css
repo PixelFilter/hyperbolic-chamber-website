@@ -2520,6 +2520,13 @@ label,
   display: none;
 }
 
+.form-card .form-success .eyebrow {
+  display: block;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
 .form-success__title {
   margin: 0;
   font-size: clamp(1.7rem, 4vw, 2.6rem);
@@ -2527,13 +2534,14 @@ label,
   text-transform: uppercase;
 }
 
-.form-success__copy {
+.form-card .form-success__copy {
   display: block;
   margin: 0;
   max-width: 30rem;
-  color: var(--text);
+  color: var(--muted);
+  font-family: "Space Mono", "Courier New", monospace;
   font-size: 1rem;
-  line-height: 1.7;
+  line-height: 1.55;
 }
 
 .footer-grid {

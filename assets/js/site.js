@@ -252,6 +252,15 @@ function wireFeaturedForm() {
     status.dataset.state = state || "";
   }
 
+  function setSuccessState(isSuccess) {
+    if (formFields) {
+      formFields.hidden = isSuccess;
+    }
+    if (successPanel) {
+      successPanel.hidden = !isSuccess;
+    }
+  }
+
   if (!featuredSubmissionEndpoint || featuredSubmissionEndpoint.includes("your-form-id")) {
     setStatus("Add your Formspree form URL in assets/js/site-data.js to enable submissions.", "error");
     if (submitButton) {
@@ -294,12 +303,7 @@ function wireFeaturedForm() {
 
       form.reset();
       setStatus("", "");
-      if (formFields) {
-        formFields.hidden = true;
-      }
-      if (successPanel) {
-        successPanel.hidden = false;
-      }
+      setSuccessState(true);
     } catch (error) {
       setStatus("Something went wrong while sending. Please try again in a moment.", "error");
     } finally {
