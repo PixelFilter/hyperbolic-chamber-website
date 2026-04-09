@@ -239,6 +239,8 @@ function wireFeaturedForm() {
 
   const submitButton = form.querySelector('button[type="submit"]');
   const status = form.querySelector("[data-featured-form-status]");
+  const formFields = form.querySelector("[data-featured-form-fields]");
+  const successPanel = form.querySelector("[data-featured-form-success]");
   const featuredSubmissionEndpoint = siteData.forms && typeof siteData.forms.featuredSubmissionEndpoint === "string"
     ? siteData.forms.featuredSubmissionEndpoint.trim()
     : "";
@@ -291,7 +293,13 @@ function wireFeaturedForm() {
       }
 
       form.reset();
-      setStatus("Submission sent. We will listen and reach out if it fits the chamber.", "success");
+      setStatus("", "");
+      if (formFields) {
+        formFields.hidden = true;
+      }
+      if (successPanel) {
+        successPanel.hidden = false;
+      }
     } catch (error) {
       setStatus("Something went wrong while sending. Please try again in a moment.", "error");
     } finally {

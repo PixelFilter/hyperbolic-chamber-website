@@ -92,28 +92,36 @@
         <section class="section">
           <div class="feature-form-layout feature-form-layout--align-center">
             <form class="form-card" data-featured-form>
-              <div class="field">
-                <label for="name">Name</label>
-                <input id="name" name="name" type="text" required>
+              <div data-featured-form-fields>
+                <div class="field">
+                  <label for="name">Name</label>
+                  <input id="name" name="name" type="text" required>
+                </div>
+                <div class="field">
+                  <label for="artistName">Artist Name</label>
+                  <input id="artistName" name="artistName" type="text" required>
+                </div>
+                <div class="field">
+                  <label for="email">Email</label>
+                  <input id="email" name="email" type="email" required>
+                </div>
+                <div class="field">
+                  <label for="portfolio">Portfolio Link</label>
+                  <input id="portfolio" name="portfolio" type="url" required>
+                </div>
+                <div class="field">
+                  <label for="message">Message</label>
+                  <textarea id="message" name="message" placeholder="Tell us about your sound, references, and the room you imagine this living in."></textarea>
+                </div>
+                <p class="form-status" data-featured-form-status hidden aria-live="polite"></p>
+                <button class="button" type="submit">Submit</button>
               </div>
-              <div class="field">
-                <label for="artistName">Artist Name</label>
-                <input id="artistName" name="artistName" type="text" required>
+
+              <div class="form-success" data-featured-form-success hidden aria-live="polite">
+                <p class="eyebrow">Submission Received</p>
+                <h2 class="form-success__title">Submission Received</h2>
+                <p class="form-success__copy">Your submission is in. If the sound fits the chamber, we'll be in touch.</p>
               </div>
-              <div class="field">
-                <label for="email">Email</label>
-                <input id="email" name="email" type="email" required>
-              </div>
-              <div class="field">
-                <label for="portfolio">Portfolio Link</label>
-                <input id="portfolio" name="portfolio" type="url" required>
-              </div>
-              <div class="field">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" placeholder="Tell us about your sound, references, and the room you imagine this living in."></textarea>
-              </div>
-              <p class="form-status" data-featured-form-status hidden aria-live="polite"></p>
-              <button class="button" type="submit">Submit</button>
             </form>
 
             <article class="origins-connect featured-connect">
