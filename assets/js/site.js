@@ -524,16 +524,16 @@ function initializeRandomLogoGlitch() {
   }
 
   function setGlitchVariables() {
-    const duration = randomInt(360, 760);
+    const duration = randomInt(280, 820);
     logo.style.setProperty("--logo-glitch-duration", `${duration}ms`);
     stack.style.setProperty("--logo-glitch-duration", `${duration}ms`);
 
-    stack.style.setProperty("--logo-channel-opacity", randomBetween(0.08, 0.16).toFixed(2));
-    stack.style.setProperty("--logo-slice-opacity", randomBetween(0.16, 0.28).toFixed(2));
-    stack.style.setProperty("--logo-channel-a-x", `${randomBetween(-8, -3).toFixed(2)}px`);
-    stack.style.setProperty("--logo-channel-a-y", `${randomBetween(-1.5, 1.5).toFixed(2)}px`);
-    stack.style.setProperty("--logo-channel-b-x", `${randomBetween(3, 8).toFixed(2)}px`);
-    stack.style.setProperty("--logo-channel-b-y", `${randomBetween(-1.5, 1.5).toFixed(2)}px`);
+    stack.style.setProperty("--logo-channel-opacity", randomBetween(0.08, 0.24).toFixed(2));
+    stack.style.setProperty("--logo-slice-opacity", randomBetween(0.14, 0.34).toFixed(2));
+    stack.style.setProperty("--logo-channel-a-x", `${randomBetween(-12, -2).toFixed(2)}px`);
+    stack.style.setProperty("--logo-channel-a-y", `${randomBetween(-2.5, 2.5).toFixed(2)}px`);
+    stack.style.setProperty("--logo-channel-b-x", `${randomBetween(2, 12).toFixed(2)}px`);
+    stack.style.setProperty("--logo-channel-b-y", `${randomBetween(-2.5, 2.5).toFixed(2)}px`);
 
     for (let index = 1; index <= 3; index += 1) {
       const sliceTopRanges = [
@@ -549,7 +549,7 @@ function initializeRandomLogoGlitch() {
       const [topMin, topMax] = sliceTopRanges[index - 1];
       const [bottomMin, bottomMax] = sliceBottomRanges[index - 1];
 
-      stack.style.setProperty(`--logo-slice${index}-x`, `${randomBetween(-10, 10).toFixed(2)}px`);
+      stack.style.setProperty(`--logo-slice${index}-x`, `${randomBetween(-16, 16).toFixed(2)}px`);
       stack.style.setProperty(`--logo-slice${index}-top`, `${randomInt(topMin, topMax)}%`);
       stack.style.setProperty(`--logo-slice${index}-bottom`, `${randomInt(bottomMin, bottomMax)}%`);
     }
@@ -558,11 +558,11 @@ function initializeRandomLogoGlitch() {
       const top = randomInt(4, 70);
       const bottom = randomInt(3, Math.max(4, 92 - top));
 
-      logo.style.setProperty(`--logo-glitch-x${index}`, `${randomBetween(-7, 7).toFixed(2)}px`);
-      logo.style.setProperty(`--logo-glitch-y${index}`, `${randomBetween(-3, 3).toFixed(2)}px`);
-      logo.style.setProperty(`--logo-glitch-skew${index}`, `${randomBetween(-2.2, 2.2).toFixed(2)}deg`);
-      logo.style.setProperty(`--logo-glitch-scale-x${index}`, randomBetween(0.99, 1.025).toFixed(3));
-      logo.style.setProperty(`--logo-glitch-scale-y${index}`, randomBetween(0.985, 1.02).toFixed(3));
+      logo.style.setProperty(`--logo-glitch-x${index}`, `${randomBetween(-10, 10).toFixed(2)}px`);
+      logo.style.setProperty(`--logo-glitch-y${index}`, `${randomBetween(-4, 4).toFixed(2)}px`);
+      logo.style.setProperty(`--logo-glitch-skew${index}`, `${randomBetween(-3.2, 3.2).toFixed(2)}deg`);
+      logo.style.setProperty(`--logo-glitch-scale-x${index}`, randomBetween(0.985, 1.035).toFixed(3));
+      logo.style.setProperty(`--logo-glitch-scale-y${index}`, randomBetween(0.98, 1.025).toFixed(3));
       logo.style.setProperty(`--logo-glitch-top${index}`, `${top}%`);
       logo.style.setProperty(`--logo-glitch-bottom${index}`, `${bottom}%`);
     }
@@ -576,7 +576,7 @@ function initializeRandomLogoGlitch() {
   }
 
   function queueNextBurst() {
-    const nextDelay = randomInt(2400, 5200);
+    const nextDelay = randomInt(900, 2600);
 
     window.setTimeout(() => {
       const duration = setGlitchVariables();

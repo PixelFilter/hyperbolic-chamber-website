@@ -1039,8 +1039,8 @@ label,
   z-index: 1;
   border-radius: 32px;
   background:
-    radial-gradient(ellipse at center, rgba(255, 208, 136, 0.46) 0%, rgba(255, 162, 68, 0.28) 30%, rgba(255, 112, 30, 0.12) 54%, transparent 76%),
-    linear-gradient(90deg, transparent 0%, rgba(255, 184, 104, 0.18) 18%, rgba(255, 184, 104, 0.18) 82%, transparent 100%);
+    radial-gradient(ellipse at center, rgba(255, 220, 154, 0.62) 0%, rgba(255, 170, 72, 0.38) 30%, rgba(255, 116, 32, 0.16) 54%, transparent 76%),
+    linear-gradient(90deg, transparent 0%, rgba(255, 194, 116, 0.24) 18%, rgba(255, 194, 116, 0.24) 82%, transparent 100%);
   opacity: 0;
   transform: translate(-50%, -48%) scale(0.96);
   filter: blur(38px);
@@ -1207,13 +1207,13 @@ label,
 @keyframes logoBacklightPulse {
   0%,
   100% {
-    opacity: 0.52;
+    opacity: 0.66;
     transform: translate(-50%, -48%) scale(0.92);
     filter: blur(42px);
   }
 
   50% {
-    opacity: 0.9;
+    opacity: 1;
     transform: translate(-50%, -48%) scale(1.02);
     filter: blur(52px);
   }
