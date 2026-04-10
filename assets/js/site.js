@@ -534,6 +534,9 @@ function initializeRandomLogoGlitch() {
     stack.style.setProperty("--logo-channel-a-y", `${randomBetween(-2.5, 2.5).toFixed(2)}px`);
     stack.style.setProperty("--logo-channel-b-x", `${randomBetween(2, 12).toFixed(2)}px`);
     stack.style.setProperty("--logo-channel-b-y", `${randomBetween(-2.5, 2.5).toFixed(2)}px`);
+    stack.style.setProperty("--logo-channel-a-hue", `${randomBetween(-55, 25).toFixed(2)}deg`);
+    stack.style.setProperty("--logo-channel-b-hue", `${randomBetween(140, 240).toFixed(2)}deg`);
+    stack.style.setProperty("--logo-slice-hue", `${randomBetween(10, 90).toFixed(2)}deg`);
 
     for (let index = 1; index <= 3; index += 1) {
       const sliceTopRanges = [

@@ -1109,15 +1109,26 @@ label,
 .home-stage__logo-stack.is-glitching .home-stage__logo-channel {
   z-index: 4;
   opacity: var(--logo-channel-opacity, 0.18);
+  mix-blend-mode: screen;
   animation: logoSliceBurst var(--logo-glitch-duration, 560ms) steps(1, end) 1;
 }
 
 .home-stage__logo-stack.is-glitching .home-stage__logo-channel--a {
+  filter:
+    sepia(1)
+    saturate(2.8)
+    hue-rotate(var(--logo-channel-a-hue, -24deg))
+    brightness(1.04);
   transform:
     translate3d(var(--logo-channel-a-x, -6px), var(--logo-channel-a-y, 1px), 0);
 }
 
 .home-stage__logo-stack.is-glitching .home-stage__logo-channel--b {
+  filter:
+    sepia(1)
+    saturate(3)
+    hue-rotate(var(--logo-channel-b-hue, 182deg))
+    brightness(1.06);
   transform:
     translate3d(var(--logo-channel-b-x, 6px), var(--logo-channel-b-y, -1px), 0);
 }
@@ -1125,6 +1136,12 @@ label,
 .home-stage__logo-stack.is-glitching .home-stage__logo-slice {
   z-index: 5;
   opacity: var(--logo-slice-opacity, 0.28);
+  mix-blend-mode: screen;
+  filter:
+    sepia(1)
+    saturate(1.9)
+    hue-rotate(var(--logo-slice-hue, 42deg))
+    brightness(1.02);
   animation: logoSliceBurst var(--logo-glitch-duration, 560ms) steps(1, end) 1;
 }
 
