@@ -7,6 +7,96 @@ const worldPremiere = siteData.worldPremiere || null;
 const repeatedTickerItems = episodes.length ? [...episodes, ...episodes] : [];
 const defaultEpisodeSort = "asc";
 
+function isSoundCloudEmbedUrl(url) {
+  return typeof url === "string" && url.includes("w.soundcloud.com/player");
+}
+
+let soundCloudWidgetApiPromise = null;
+
+function setSoundCloudFrameState(iframe, isLoading) {
+  if (!iframe) return;
+
+  const frame = iframe.closest(".embed-frame");
+  if (!frame) return;
+
+  const src = iframe.getAttribute("src") || "";
+  if (!isSoundCloudEmbedUrl(src)) {
+    frame.classList.remove("embed-frame--soundcloud", "is-loading", "is-loaded");
+    return;
+  }
+
+  frame.classList.add("embed-frame--soundcloud");
+  frame.classList.toggle("is-loading", isLoading);
+  frame.classList.toggle("is-loaded", !isLoading);
+}
+
+function loadSoundCloudWidgetApi() {
+  if (window.SC && window.SC.Widget) {
+    return Promise.resolve(window.SC.Widget);
+  }
+
+  if (soundCloudWidgetApiPromise) {
+    return soundCloudWidgetApiPromise;
+  }
+
+  soundCloudWidgetApiPromise = new Promise((resolve, reject) => {
+    const existingScript = document.querySelector('script[src="https://w.soundcloud.com/player/api.js"]');
+
+    if (existingScript) {
+      existingScript.addEventListener("load", () => resolve(window.SC && window.SC.Widget), { once: true });
+      existingScript.addEventListener("error", reject, { once: true });
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = "https://w.soundcloud.com/player/api.js";
+    script.async = true;
+    script.onload = () => resolve(window.SC && window.SC.Widget);
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+
+  return soundCloudWidgetApiPromise;
+}
+
+function trackSoundCloudEmbedLoad(iframe) {
+  if (!iframe) return;
+
+  const src = iframe.getAttribute("src") || "";
+  if (!isSoundCloudEmbedUrl(src)) return;
+
+  const loadToken = `${Date.now()}-${Math.random()}`;
+  iframe.dataset.soundcloudLoadToken = loadToken;
+  setSoundCloudFrameState(iframe, true);
+
+  const finishLoading = () => {
+    if (iframe.dataset.soundcloudLoadToken !== loadToken) return;
+    setSoundCloudFrameState(iframe, false);
+  };
+
+  loadSoundCloudWidgetApi()
+    .then((widgetFactory) => {
+      if (!widgetFactory || iframe.dataset.soundcloudLoadToken !== loadToken) return;
+
+      const widget = widgetFactory(iframe);
+      widget.bind(window.SC.Widget.Events.READY, () => {
+        window.setTimeout(finishLoading, 240);
+      });
+      widget.bind(window.SC.Widget.Events.ERROR, finishLoading);
+    })
+    .catch(() => {
+      iframe.addEventListener("load", () => {
+        window.setTimeout(finishLoading, 900);
+      }, { once: true });
+    });
+
+  window.setTimeout(finishLoading, 6000);
+}
+
+function initializeSoundCloudEmbedLoaders(root = document) {
+  root.querySelectorAll(".embed-frame iframe").forEach(trackSoundCloudEmbedLoad);
+}
+
 function getCompactEpisodeEmbed(episode) {
   if (!episode || !episode.embed) return "";
 
@@ -59,6 +149,7 @@ function renderEpisodesGrid(sortOrder = defaultEpisodeSort) {
   if (!mount || !episodes.length) return;
 
   mount.innerHTML = getSortedEpisodes(sortOrder).map(episodeCardMarkup).join("");
+  initializeSoundCloudEmbedLoaders(mount);
 }
 
 function wireEpisodeSort() {
@@ -103,8 +194,10 @@ function renderFeaturedEpisode() {
   }
 
   if (iframe) {
+    setSoundCloudFrameState(iframe, true);
     iframe.src = featuredEpisode.embed;
     iframe.title = `Episode ${featuredEpisode.number}: ${featuredEpisode.title}`;
+    trackSoundCloudEmbedLoad(iframe);
   }
 }
 
@@ -219,8 +312,10 @@ function renderEpisodeMeta() {
   });
 
   document.querySelectorAll("[data-featured-episode-embed]").forEach((node) => {
+    setSoundCloudFrameState(node, true);
     node.src = getCompactEpisodeEmbed(randomFeaturedEpisode);
     node.title = `Featured Episode ${randomFeaturedEpisode.number}: ${randomFeaturedEpisode.title}`;
+    trackSoundCloudEmbedLoad(node);
   });
 }
 
@@ -506,6 +601,7 @@ function initializeRandomLogoGlitch() {
 
 initializeHomeLoader();
 initializeRandomLogoGlitch();
+initializeSoundCloudEmbedLoaders();
 renderArchiveCount();
 wireEpisodeSort();
 renderFeaturedEpisode();
