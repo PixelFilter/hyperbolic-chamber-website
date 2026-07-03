@@ -1,11 +1,39 @@
 const siteData = window.siteData || {};
 const episodes = Array.isArray(siteData.episodes) ? siteData.episodes : [];
-const latestEpisode = episodes[episodes.length - 1] || null;
+const latestEpisode = getLatestEpisode(episodes);
 const randomFeaturedEpisode = episodes.length ? episodes[Math.floor(Math.random() * episodes.length)] : null;
-const featuredEpisode = episodes.find((episode) => episode.number === siteData.featuredEpisodeNumber) || latestEpisode;
+const featuredEpisode = latestEpisode;
 const worldPremiere = siteData.worldPremiere || null;
 const repeatedTickerItems = episodes.length ? [...episodes, ...episodes] : [];
 const defaultEpisodeSort = "asc";
+
+function getEpisodeNumber(episode) {
+  return Number(episode && episode.number) || 0;
+}
+
+function getEpisodeDateTime(episode) {
+  if (!episode || typeof episode.date !== "string") return 0;
+
+  const match = episode.date.trim().match(/^(\d{1,2})[./-](\d{1,2})[./-](\d{4})$/);
+  if (!match) return 0;
+
+  const [, month, day, year] = match;
+  const time = new Date(Number(year), Number(month) - 1, Number(day)).getTime();
+
+  return Number.isNaN(time) ? 0 : time;
+}
+
+function getLatestEpisode(episodeList) {
+  return episodeList.reduce((latest, episode) => {
+    if (!latest) return episode;
+
+    const dateDifference = getEpisodeDateTime(episode) - getEpisodeDateTime(latest);
+    if (dateDifference > 0) return episode;
+    if (dateDifference < 0) return latest;
+
+    return getEpisodeNumber(episode) > getEpisodeNumber(latest) ? episode : latest;
+  }, null);
+}
 
 function isSoundCloudEmbedUrl(url) {
   return typeof url === "string" && url.includes("w.soundcloud.com/player");

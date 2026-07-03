@@ -1,6 +1,4 @@
 ﻿window.siteData = {
-  featuredEpisodeNumber: "34",
-
   forms: {
     featuredSubmissionEndpoint: "https://formspree.io/f/mgopjvwr"
   },
