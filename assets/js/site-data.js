@@ -1,5 +1,5 @@
 ﻿window.siteData = {
-  featuredEpisodeNumber: "33",
+  featuredEpisodeNumber: "34",
 
   forms: {
     featuredSubmissionEndpoint: "https://formspree.io/f/mgopjvwr"
@@ -317,6 +317,15 @@
       date: "04.16.2026",
       embed:
         "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2302932050&color=%23161616&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true&wmode=opaque"
+    },
+    {
+      number: "34",
+      title: "Relentless Pursuit",
+      guest: "ZEEKY",
+      guestUrl: "https://www.instagram.com/zeeky.dj/",
+      date: "07/03/2026",
+      embed:
+        "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2352677774&color=%23161616&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true&wmode=opaque"
     }
   ]
 };
