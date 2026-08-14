@@ -324,6 +324,15 @@
       date: "07/03/2026",
       embed:
         "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2352677774&color=%23161616&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true&wmode=opaque"
+    },
+    {
+      number: "35",
+      title: "A Groove Mood",
+      guest: "Ev O'Reilly",
+      guestUrl: "https://www.instagram.com/evanoreilly32/",
+      date: "08.13.2026",
+      embed:
+        "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2381157327&color=%23161616&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true&wmode=opaque&secret_token=s-XC4lOlvRUq6"
     }
   ]
 };
