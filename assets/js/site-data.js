@@ -333,6 +333,15 @@
       date: "08.13.2026",
       embed:
         "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2381157327&color=%23161616&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true&wmode=opaque&secret_token=s-XC4lOlvRUq6"
+    },
+    {
+      number: "36",
+      title: "Warped",
+      guest: "kish",
+      guestUrl: "https://www.instagram.com/kishlay18_/",
+      date: "10.01.2026",
+      embed:
+        "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2401833426&color=%23161616&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true&wmode=opaque"
     }
   ]
 };
