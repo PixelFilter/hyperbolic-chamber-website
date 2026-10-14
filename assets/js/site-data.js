@@ -342,6 +342,15 @@
       date: "10.01.2026",
       embed:
         "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2401833426&color=%23161616&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true&wmode=opaque"
+    },
+    {
+      number: "37",
+      title: "Wrecking Ball Sounds",
+      guest: "moscowdrugmule",
+      guestUrl: "https://soundcloud.com/hyperbolic_chamber/hc-37-wrecking-ball-sounds",
+      date: "10.14.2026",
+      embed:
+        "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2415670392&color=%23161616&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true&wmode=opaque"
     }
   ]
 };
